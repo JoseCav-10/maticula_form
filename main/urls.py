@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from matricula.views import index, listagem
+from matricula.views import index, listagem, change_values
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('list/', listagem, name="listagem"),
+    path('instancia/<int:id>/', change_values, name="troca")
 ]

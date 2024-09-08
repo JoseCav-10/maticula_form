@@ -30,6 +30,30 @@ def listagem(request):
 
     return render(request, "listagem.html", context=context)
 
+
+def change_values(request, id=None):
+    if id is not None:
+        aluno = Aluno.objects.get(id=id)
+
+        if request.method == "POST":
+            form = AlunoForm(request.POST, request.FILES, instance=aluno)
+            if form.is_valid():
+                form.save()
+                return redirect("listagem")
+
+        else: 
+            form = AlunoForm(instance=aluno)
+        
+        context = {
+            "form": form,
+            "obj": aluno
+        }
+
+    return render(request, "troca.html", context)
+
+
+
+
 '''def AlunoForm(request):
     if request.method == "POST":
         form = AlunoForm(request.POST, request.FILES)
